@@ -31,7 +31,7 @@ jobs:
         S3_BUCKET: 'lambdas.bryval.tech' 
       run: |
         cd lambdas
-        zip getCount.zip getCount
+        zip getCount.zip getCount/lambda_function.py
         python -c "import boto3; boto3.client('s3').upload_file('getCount.zip', '${S3_BUCKET}', 'getCount.zip')"
-        zip updateCount.zip updateCount
+        zip updateCount.zip updateCount/lambda_function.py
         python -c "import boto3; boto3.client('s3').upload_file('updateCount.zip', '${S3_BUCKET}', 'updateCount.zip')"

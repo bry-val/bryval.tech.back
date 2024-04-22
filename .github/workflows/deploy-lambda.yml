@@ -30,8 +30,9 @@ jobs:
         AWS_REGION: 'us-east-1' 
         S3_BUCKET: 'lambdas.bryval.tech' 
       run: |
-        cd lambdas
-        zip getCount.zip getCount/lambda_function.py
-        python -c "import boto3; boto3.client('s3').upload_file('getCount.zip', '${S3_BUCKET}', 'getCount.zip')"
-        zip updateCount.zip updateCount/lambda_function.py
-        python -c "import boto3; boto3.client('s3').upload_file('updateCount.zip', '${S3_BUCKET}', 'updateCount.zip')"
+        cd lambdas/getCount
+        zip ../getCount.zip lambda_function.py
+        python -c "import boto3; boto3.client('s3').upload_file('../getCount.zip', '${S3_BUCKET}', 'getCount.zip')"
+        cd ../updateCount
+        zip ../updateCount.zip lambda_function.py
+        python -c "import boto3; boto3.client('s3').upload_file('../updateCount.zip', '${S3_BUCKET}', 'updateCount.zip')"

@@ -17,7 +17,7 @@ resource "aws_iam_policy" "AWSLambdaMicroserviceExecutionRole" {
         "dynamodb:UpdateItem"
       ],
       "Effect": "Allow",
-      "Resource": arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/*
+      "Resource": "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/*"
     }
   ],
   "Version": "2012-10-17"

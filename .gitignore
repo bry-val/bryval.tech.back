@@ -1,2 +1,4 @@
 
 *.exe
+lambdas/updateCount/updateCount.zip
+lambdas/getCount/getCount.zip

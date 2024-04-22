@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "lambda_bucket" {
-  bucket = "lambdas.bryval.tech"
+  bucket = "lambda.bryval.tech"
 }
 
 resource "aws_s3_bucket_ownership_controls" "lambda_bucket" {
@@ -18,16 +18,14 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
 
 resource "aws_s3_object" "getCountCode" {
   bucket = aws_s3_bucket.lambda_bucket.bucket
-  key    = "lambda_function.zip"
-  source = "path_to_your_local_file/lambda_function.zip" # replace with your local file path
-  etag   = filemd5("path_to_your_local_file/lambda_function.zip") # replace with your local file path
+  key    = "getCount.zip"
+  source = "../lambdas/getCount/getCount.zip"
 }
 
 resource "aws_s3_object" "updateCountCode" {
   bucket = aws_s3_bucket.lambda_bucket.bucket
-  key    = "lambda_function.zip"
-  source = "path_to_your_local_file/lambda_function.zip" # replace with your local file path
-  etag   = filemd5("path_to_your_local_file/lambda_function.zip") # replace with your local file path
+  key    = "updateCount.zip"
+  source = "../lambdas/updateCount/updateCount.zip"
 }
 
 resource "aws_lambda_function" "getCount" {

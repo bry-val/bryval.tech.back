@@ -4,7 +4,10 @@ def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('bryval-update')
 
-    response = table.update_item(Key={'counter': 0},
+    response = table.update_item(
+        Key={
+            'counter': 0
+            },
         UpdateExpression='ADD #count :val1',
         ExpressionAttributeNames={
             '#count': 'count'

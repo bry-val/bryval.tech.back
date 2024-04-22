@@ -6,9 +6,7 @@ def lambda_handler(event, context):
 
     response = table.get_item(
         Key={ 
-            'counter': 0 
-            }
-        )
+            'counter': 0 })
 
     item = response['Item']
     count_value = item['count']

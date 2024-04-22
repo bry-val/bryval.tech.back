@@ -27,7 +27,7 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-west-2' # replace with your AWS region
+        AWS_REGION: 'us-east-1' # replace with your AWS region
         S3_BUCKET: 'my-lambda-function-bucket' # replace with your S3 bucket name
       run: |
         zip lambda_function.zip lambda_function.py

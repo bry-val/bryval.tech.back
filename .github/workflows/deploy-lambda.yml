@@ -2,8 +2,8 @@ name: Upload to S3
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    paths: [ "lambdas/**" ]
 
 jobs:
   deploy:
@@ -27,8 +27,10 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-1' # replace with your AWS region
-        S3_BUCKET: 'my-lambda-function-bucket' # replace with your S3 bucket name
+        AWS_REGION: 'us-east-1' 
+        S3_BUCKET: 'lambdas.bryval.tech' 
       run: |
-        zip lambda_function.zip lambda_function.py
-        python -c "import boto3; boto3.client('s3').upload_file('lambda_function.zip', '${S3_BUCKET}', 'lambda_function.zip')"
+        zip getCount.zip lambdas/getCount.py
+        python -c "import boto3; boto3.client('s3').upload_file('getCount.zip', '${S3_BUCKET}', 'getCount.zip')"
+        zip updateCount.zip lambdas/updateCount.py
+        python -c "import boto3; boto3.client('s3').upload_file('updateCount.zip', '${S3_BUCKET}', 'updateCount.zip')"

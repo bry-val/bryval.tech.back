@@ -2,3 +2,4 @@
 *.exe
 lambdas/updateCount/updateCount.zip
 lambdas/getCount/getCount.zip
+.github/workflows/zip-lambdas.yml

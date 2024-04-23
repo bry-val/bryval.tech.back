@@ -5,33 +5,26 @@ on:
 
 jobs:
   zip-lambda-functions:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup PowerShell
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+    - name: Install Zip
+      run: apt-get update && apt-get install -y zip
 
     - name: Zip Lambda Functions
       run: |
-        function Zip-LambdaFunctions {
-            param (
-                [Parameter(Mandatory=$true)]
-                [string[]]$folderNames
-            )
-
-            foreach ($folderName in $folderNames) {
-                $lambda_file = "..\lambdas\$folderName\lambda_function.py"
-                $lambda_dir = Split-Path -Parent $lambda_file
-                $zip_file = "..\lambdas\$folderName\$folderName.zip"
-                Compress-Archive -Path $lambda_file -DestinationPath $zip_file -Force
-            }
+        zip_lambda_functions() {
+            folder_names=("$@")
+            for folder_name in "${folder_names[@]}"; do
+                lambda_file="lambdas/${folder_name}/lambda_function.py"
+                zip_file="lambdas/${folder_name}/${folder_name}.zip"
+                zip -j "${zip_file}" "${lambda_file}"
+            done
         }
 
-        $folders = @("getCount", "updateCount")
-        Zip-LambdaFunctions -folderNames $folders
-      shell: pwsh
+        folders=("getCount" "updateCount")
+        zip_lambda_functions "${folders[@]}"
+      shell: bash
